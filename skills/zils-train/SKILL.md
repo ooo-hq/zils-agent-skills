@@ -9,9 +9,13 @@ A Zils model answers one repeated question about an input: yes or no, one of
 a list, or a score. Training needs rows where the input and the right answer
 are both known.
 
-1. Call the `train_guide` tool from the `zils` MCP server and follow it step
-   by step. It is the current walkthrough: signing in, preparing the file,
-   checking it, the cost limit, submitting, and calling the finished model.
+1. Read the training guide and follow it step by step. It is the current
+   walkthrough: signing in, preparing the file, checking it, the cost limit,
+   submitting, and calling the finished model.
+   - If the `zils` MCP server is connected, call its `train_guide` tool.
+   - If it is not, run `npx -y @zils/cli@0.4.21 train guide` in a shell. It
+     prints the same guide and says which `zils` command stands in for each
+     tool. It needs no login and sends nothing.
 2. Ask the user before anything that spends money or sends their data. Every
    submission takes a cost limit; state it to the user first.
 3. Never put a key in a tool argument or a command. Sign-in is `zils login`,

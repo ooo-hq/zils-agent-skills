@@ -52,7 +52,7 @@ The agent runs `zils login` and you finish sign-in in your browser. No key goes 
 
 ## What this plugin runs and where your data goes
 
-- **What it runs.** The plugin starts one local program: `npx -y @zils/cli@0.4.20 mcp`. That downloads the `@zils/cli` package, pinned to that exact version, from the npm registry. On first start the package installs the Zils Python client and its dependencies from PyPI into a private cache. It does not change your system Python.
+- **What it runs.** The plugin starts one local program: `npx -y @zils/cli@0.4.21 mcp`. That downloads the `@zils/cli` package, pinned to that exact version, from the npm registry. On first start the package installs the Zils Python client and its dependencies from PyPI into a private cache. It does not change your system Python.
 - **What stays on your machine.** Scanning your code for decision calls and preparing training files happen locally.
 - **What is sent to Zils.** When you sign in, call a model, measure Zils on your examples, or submit a training run, the inputs, answers and training files involved are sent to the Zils service at `training.zils.ai`. Every training submission carries a cost limit you approve.
 - **Nowhere else.** The MCP server and the skills send your data to no other service.

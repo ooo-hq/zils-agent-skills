@@ -1,6 +1,6 @@
 {
   "name": "zils",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Train a custom decision model on your own data and call it from your code: yes/no, choice and score answers.",
   "author": { "name": "Zils" },
   "homepage": "https://zils.ai",

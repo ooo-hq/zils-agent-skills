@@ -6,7 +6,7 @@ import unittest
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-CLI = "0.4.20"  # the @zils/cli release this plugin runs; raise it with each CLI release
+CLI = "0.4.21"  # the @zils/cli release this plugin runs; raise it with each CLI release
 # Anthropic's directory refuses a package launcher that is not pinned to an exact version.
 RUN = {"command": "npx", "args": ["-y", f"@zils/cli@{CLI}", "mcp"]}
 
@@ -98,6 +98,8 @@ class SkillTests(unittest.TestCase):
         # The steps live in the MCP server (train_guide), so they cannot go stale here.
         text = (ROOT / "skills/zils-train/SKILL.md").read_text(encoding="utf-8")
         self.assertIn("train_guide", text)
+        # Agents with no MCP server (skills installed by `npx skills add`) read it from the shell.
+        self.assertIn(f"npx -y @zils/cli@{CLI} train guide", text)
         self.assertLess(len(text.splitlines()), 40)
 
 
