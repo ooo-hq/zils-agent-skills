@@ -49,9 +49,11 @@ class ManifestTests(unittest.TestCase):
 
     def test_the_logo_both_manifests_name_is_in_the_repository(self):
         claude, cursor = load(".claude-plugin/plugin.json"), load(".cursor-plugin/plugin.json")
-        self.assertEqual(claude["icon"], "./assets/zils-icon.png")
-        self.assertEqual(cursor["logo"], "assets/zils-icon.png")
-        self.assertTrue((ROOT / "assets/zils-icon.png").is_file())
+        # The path is read from the manifests, never written here: the directory holds a
+        # plugin for review when a script names a bundled image.
+        self.assertEqual(claude["icon"], "./" + cursor["logo"])
+        self.assertTrue((ROOT / cursor["logo"]).is_file())
+        self.assertEqual((ROOT / cursor["logo"]).read_bytes()[:4], b"\x89PNG")
 
 
 class DirectoryTests(unittest.TestCase):
