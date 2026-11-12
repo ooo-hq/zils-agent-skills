@@ -1,6 +1,6 @@
 {
   "name": "zils",
-  "description": "Train and call custom Zils decision models from your coding agent.",
+  "metadata": { "description": "Train and call custom Zils decision models from your coding agent." },
   "owner": { "name": "Zils" },
   "plugins": [{ "name": "zils", "source": "./" }]
 }
