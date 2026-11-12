@@ -19,6 +19,14 @@ claude plugin install zils@zils
 
 **Cursor:** add this repository as a plugin, or copy `mcp.json` into `.cursor/mcp.json`.
 
+**Skills only, for any agent that reads skills** (Codex, Gemini CLI, opencode, Pi and others):
+
+```sh
+npx skills add ooo-hq/zils-agent-skills
+```
+
+This installs the two skills without the MCP server. Add the server too where the agent supports MCP.
+
 **Any other agent:** add the MCP server by itself.
 
 ```sh
