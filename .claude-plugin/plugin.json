@@ -1,12 +1,16 @@
 {
   "name": "zils",
   "displayName": "Zils",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Train a custom decision model on your own data and call it from your code: yes/no, choice and score answers.",
   "author": { "name": "Zils", "url": "https://zils.ai" },
   "homepage": "https://zils.ai",
   "repository": "https://github.com/ooo-hq/zils-agent-skills",
   "license": "MIT",
   "keywords": ["decision-models", "classification", "fine-tuning", "mcp"],
-  "icon": "./assets/zils-icon.png"
+  "icon": "./assets/zils-icon.png",
+  "documentationUrl": "https://docs.zils.ai",
+  "supportUrl": "https://zils.ai/contact",
+  "privacyPolicyUrl": "https://zils.ai/privacy",
+  "termsOfServiceUrl": "https://zils.ai/terms"
 }

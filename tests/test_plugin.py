@@ -6,7 +6,9 @@ import unittest
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-RUN = {"command": "npx", "args": ["-y", "@zils/cli", "mcp"]}  # what `claude mcp add zils` runs
+CLI = "0.4.20"  # the @zils/cli release this plugin runs; raise it with each CLI release
+# Anthropic's directory refuses a package launcher that is not pinned to an exact version.
+RUN = {"command": "npx", "args": ["-y", f"@zils/cli@{CLI}", "mcp"]}
 
 
 def load(path):
@@ -50,6 +52,35 @@ class ManifestTests(unittest.TestCase):
         self.assertEqual(claude["icon"], "./assets/zils-icon.png")
         self.assertEqual(cursor["logo"], "assets/zils-icon.png")
         self.assertTrue((ROOT / "assets/zils-icon.png").is_file())
+
+
+class DirectoryTests(unittest.TestCase):
+    """Rules of Anthropic's plugin directory that `claude plugin validate` does not check."""
+
+    def test_the_listing_links_to_the_policy_and_help_pages(self):
+        claude = load(".claude-plugin/plugin.json")
+        self.assertEqual(claude["privacyPolicyUrl"], "https://zils.ai/privacy")
+        self.assertEqual(claude["termsOfServiceUrl"], "https://zils.ai/terms")
+        self.assertEqual(claude["documentationUrl"], "https://docs.zils.ai")
+        self.assertEqual(claude["supportUrl"], "https://zils.ai/contact")
+
+    def test_the_readme_says_what_the_plugin_runs_and_where_data_goes(self):
+        # The security scan fails behavior the README does not disclose.
+        text = (ROOT / "README.md").read_text(encoding="utf-8")
+        for needle in (f"@zils/cli@{CLI}", "npm", "PyPI", "training.zils.ai", "zils.ai/privacy"):
+            self.assertIn(needle, text)
+        prose = re.sub(r"```.*?```", "", text, flags=re.S)
+        self.assertGreaterEqual(len(prose.split()), 40)
+
+    def test_only_files_the_directory_accepts_are_tracked(self):
+        import subprocess
+
+        files = subprocess.run(
+            ["git", "ls-files"], cwd=ROOT, capture_output=True, text=True, check=True
+        ).stdout.split()
+        allowed = (".json", ".md", ".py", ".png", ".gitignore", "LICENSE")
+        self.assertEqual([f for f in files if not f.endswith(allowed)], [])
+        self.assertEqual([f for f in files if "__pycache__" in f or ".DS_Store" in f], [])
 
 
 class SkillTests(unittest.TestCase):
