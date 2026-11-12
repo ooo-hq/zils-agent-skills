@@ -1,5 +1,0 @@
-{
-  "mcpServers": {
-    "zils": { "command": "npx", "args": ["-y", "@zils/cli@0.4.21", "mcp"] }
-  }
-}

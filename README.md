@@ -7,7 +7,7 @@ This repository holds a plugin for Claude Code and Cursor. It adds:
 - **`zils-fit` skill:** finds where a decision model fits in a repository and measures it against what you use now.
 - **`zils-train` skill:** trains a model on your labeled data, with a cost limit you approve.
 
-The skills work from a shell. **The Zils MCP server** (`npx -y @zils/cli mcp`) adds the same steps as tools: find decision calls in your code, measure Zils on them, prepare training data, submit and follow a training run, and call the model. Cursor starts it from this plugin; in Claude Code you add it yourself.
+The skills work from a shell. **The Zils MCP server** (`npx -y @zils/cli mcp`) adds the same steps as tools: find decision calls in your code, measure Zils on them, prepare training data, submit and follow a training run, and call the model. The plugin does not start it; you add it with one step below.
 
 ## Install
 
@@ -24,7 +24,22 @@ The plugin installs the two skills. To add the MCP server:
 claude mcp add zils -- npx -y @zils/cli@0.4.21 mcp
 ```
 
-**Cursor:** add this repository as a plugin, or copy `mcp.json` into `.cursor/mcp.json`.
+**Cursor:** add this repository as a plugin for the two skills. To add the MCP server, put this in `.cursor/mcp.json`:
+
+```json
+{
+  "mcpServers": {
+    "zils": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@zils/cli@0.4.21",
+        "mcp"
+      ]
+    }
+  }
+}
+```
 
 **Skills only, for any agent that reads skills** (Codex, Gemini CLI, opencode, Pi and others):
 
@@ -58,7 +73,7 @@ The agent runs `zils login` and you finish sign-in in your browser. No key goes 
 
 ## What this plugin runs and where your data goes
 
-- **What it runs.** In Claude Code the plugin starts no program by itself; the skills run `zils` commands in your shell when you ask. In Cursor, and in Claude Code once you add the MCP server, one local program starts: `npx -y @zils/cli@0.4.21 mcp`. That downloads the `@zils/cli` package, pinned to that exact version, from the npm registry. On first start the package installs the Zils Python client and its dependencies from PyPI into a private cache. It does not change your system Python.
+- **What it runs.** The plugin starts no program by itself; the skills run `zils` commands in your shell when you ask. Once you add the MCP server, one local program starts: `npx -y @zils/cli@0.4.21 mcp`. That downloads the `@zils/cli` package, pinned to that exact version, from the npm registry. On first start the package installs the Zils Python client and its dependencies from PyPI into a private cache. It does not change your system Python.
 - **What stays on your machine.** Scanning your code for decision calls and preparing training files happen locally.
 - **What is sent to Zils.** When you sign in, call a model, measure Zils on your examples, or submit a training run, the inputs, answers and training files involved are sent to the Zils service at `training.zils.ai`. Every training submission carries a cost limit you approve.
 - **Nowhere else.** The MCP server and the skills send your data to no other service.
