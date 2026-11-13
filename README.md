@@ -78,7 +78,7 @@ The agent runs `zils login` and you finish sign-in in your browser. No key goes 
 - **What is sent to Zils.** When you sign in, call a model, measure Zils on your examples, or submit a training run, the inputs, answers and training files involved are sent to the Zils service at `training.zils.ai`. Every training submission carries a cost limit you approve.
 - **Nowhere else.** The MCP server and the skills send your data to no other service.
 
-How Zils handles the data it receives: [zils.ai/privacy](https://zils.ai/privacy). Terms: [zils.ai/terms](https://zils.ai/terms). Help: [docs.zils.ai](https://docs.zils.ai) or [zils.ai/contact](https://zils.ai/contact).
+How Zils handles the data it receives: [zils.ai/privacy](https://zils.ai/privacy). Terms: [zils.ai/terms](https://zils.ai/terms). Help: [docs.zils.ai](https://docs.zils.ai), the [Zils Discord](https://discord.gg/a9PJ9wchGK), or [zils.ai/contact](https://zils.ai/contact).
 
 ## License
 
