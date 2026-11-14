@@ -13,7 +13,7 @@ are both known.
    walkthrough: signing in, preparing the file, checking it, the cost limit,
    submitting, and calling the finished model.
    - If the `zils` MCP server is connected, call its `train_guide` tool.
-   - If it is not, run `npx -y @zils/cli@0.4.21 train guide` in a shell. It
+   - If it is not, run `npx -y @zils/cli@0.4.22 train guide` in a shell. It
      prints the same guide and says which `zils` command stands in for each
      tool. It needs no login and sends nothing.
 2. Ask the user before anything that spends money or sends their data. Every
